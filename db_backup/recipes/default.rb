@@ -24,7 +24,7 @@ node[:deploy].each do |app_name, deploy|
 	    	db_name: deploy[:database][:database],
 	    	db_username: deploy[:database][:username],
 	    	db_password: deploy[:database][:password],
-	    	s3_path: File.join(s3_dir, app_name)
+	    	s3_path: File.join(s3_dir, app_name),
 	    	dump_file: "/tmp/#{app_name}.psql.dump"
 	    )
 	end 
