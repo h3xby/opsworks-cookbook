@@ -21,7 +21,7 @@ node[:deploy].each do |app_name, deploy|
 			secret_access_key: node[:s3_secret_access_key],
 	    	db_host: deploy[:database][:host],
 	    	db_port: deploy[:database][:port],
-	    	db_name: deploy[:database][:name],
+	    	db_name: deploy[:database][:database],
 	    	db_username: deploy[:database][:username],
 	    	db_password: deploy[:database][:password],
 	    	s3_path: "#{s3_dir}/#{app_name}.pg_dump",
