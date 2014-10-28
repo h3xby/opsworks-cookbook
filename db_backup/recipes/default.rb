@@ -17,8 +17,6 @@ node[:deploy].each do |app_name, deploy|
 	    mode 0755
 	    group deploy[:group]
 	    variables(
-	    	access_key_id: settings[:s3_access_key_id],
-			secret_access_key: settings[:s3_secret_access_key],
 	    	db_host: deploy[:database][:host],
 	    	db_port: deploy[:database][:port],
 	    	db_name: deploy[:database][:database],
