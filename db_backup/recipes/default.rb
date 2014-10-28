@@ -11,7 +11,6 @@ node[:deploy].each do |app_name, deploy|
 
 	s3_dir = settings[:s3_path];
 	script_path = File.join(deploy[:deploy_to], "/shared/scripts/db_backup.sh")
-	timestamp = Time.now.strftime("%Y.%m.%d.%H.%M.%S")
 
 	template script_path do
 	    source "db_backup.sh.erb"
@@ -25,7 +24,7 @@ node[:deploy].each do |app_name, deploy|
 	    	db_name: deploy[:database][:database],
 	    	db_username: deploy[:database][:username],
 	    	db_password: deploy[:database][:password],
-	    	s3_path: File.join(s3_dir, app_name, "#{timestamp}.pg_dump")
+	    	s3_path: File.join(s3_dir, app_name)
 	    	dump_file: "/tmp/#{app_name}.psql.dump"
 	    )
 	end 
