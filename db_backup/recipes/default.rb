@@ -29,7 +29,7 @@ node[:deploy].each do |app_name, deploy|
 	    )
 	end 
 
-	cron "backup_database" do
+	cron "#{app_name}_backup_database" do
 		hour '3'
 		minute '0'
 		command script_path
