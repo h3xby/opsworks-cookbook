@@ -2,6 +2,10 @@ package 'awscli' do
   action :install
 end
 
+package 'postgresql-client' do
+	action :install
+end
+
 node[:deploy].each do |app_name, deploy|
 	dump_file = "/tmp/#{app_name}.sql.dump"
 	s3_dir = node[:s3_backups_path];
@@ -29,13 +33,5 @@ node[:deploy].each do |app_name, deploy|
 		hour '3'
 		minute '0'
 		command script_path
-		command %q{
-			export AWS_ACCESS_KEY_ID=#{access_key_id};
-			export AWS_SECRET_ACCESS_KEY=#{secret_access_key};
-			export PGPASSWORD="#{db_password}";
-			pg_dump -h #{db_host} -p #{db_port} -U #{db_username} -Fc #{db_name} > "#{dump_file}";
-			aws s3 cp "#{dump_file}" "#{s3_path}";
-			rm #{dump_file};
-		}
 	end
 end
